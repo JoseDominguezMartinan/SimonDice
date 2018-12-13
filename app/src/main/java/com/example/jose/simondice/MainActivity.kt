@@ -2,6 +2,7 @@ package com.example.jose.simondice
 
 import android.app.Activity
 import android.content.pm.ActivityInfo
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Button
@@ -19,6 +20,10 @@ class MainActivity : Activity() {
     lateinit var botonAzul: Button
     lateinit var botonAmarillo: Button
     lateinit var botonRestart: Button
+
+    lateinit var click: MediaPlayer
+    lateinit var fallo: MediaPlayer
+    lateinit var inicio: MediaPlayer
 
     var boton=0 // almacenaremos un entero para determinar el boton que debe ser pulsado en la secuencia
 
@@ -45,40 +50,42 @@ class MainActivity : Activity() {
          botonRestart = findViewById<Button>(R.id.restart)
 
 
-
-            // llamamos al metodo que realiza la secuencia
-
-
-
-
-
-
             // marcamos la orientacion de la pantalla, no se gira al girar el dispositivo
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
 
         // acciones que realizara cada uno de los botones cuando los pulsamos
             botonRojo.setOnClickListener{
+                click = MediaPlayer.create(this, R.raw.click)
+                sonido(click)
                 comprobar(0) // llamada al metodo que comprueba con la secuencia indicando el boton que es
                 cambiarColorRojo(botonRojo) // hacer el efecto de cambio de color
                 handler.postDelayed({colorOriginalRojo(botonRojo)},200)
             }
         botonAzul.setOnClickListener{
+            click = MediaPlayer.create(this, R.raw.click)
+            sonido(click)
             comprobar(2)
             cambiarColorAzul(botonAzul)
             handler.postDelayed({colorOriginalAzul(botonAzul)},200)
         }
         botonVerde.setOnClickListener {
+            click = MediaPlayer.create(this, R.raw.click)
+            sonido(click)
             comprobar(1)
             cambiarColorVerde(botonVerde)
             handler.postDelayed({ colorOriginalVerde(botonVerde) }, 200)
         }
         botonAmarillo.setOnClickListener{
+            click = MediaPlayer.create(this, R.raw.click)
+            sonido(click)
             comprobar(3)
             cambiarColorAmarillo(botonAmarillo)
             handler.postDelayed({colorOriginalAmarillo(botonAmarillo)},200)
         }
 
         botonRestart.setOnClickListener {
+            inicio = MediaPlayer.create(this, R.raw.inicio)
+            sonido(inicio)
             botonRestart.setText("Reiniciar")
             secuencia.clear()
             secuencia()
@@ -137,6 +144,7 @@ class MainActivity : Activity() {
 
     private fun secuencia() {
         bloquearBotones()
+        botonRestart.isClickable=false
         textEmpezar.text = "        COPIAME SI PUEDES"
 
         var retraso=1000L // variable donde meteremos el retraso entre boton y boton , se tiene que ir incrementando para qe no se pulsen todos juntos
@@ -191,6 +199,7 @@ class MainActivity : Activity() {
 
             textEmpezar.text = "        ES TU TURNO"
             desbloquearBotones()
+            botonRestart.isClickable=true
         },retraso)
 
     }
@@ -232,6 +241,8 @@ class MainActivity : Activity() {
         }
         if(perdido==true){
             bloquearBotones()
+            fallo = MediaPlayer.create(this, R.raw.fallo)
+            sonido(fallo)
             textEmpezar.text = "        HAS PERDIDO"
             perdido=false
 
@@ -262,6 +273,11 @@ class MainActivity : Activity() {
         botonRojo.isClickable=true
 
     }
+    private fun sonido(sonidos: MediaPlayer) {
+        sonidos.start()
+
+    }
+
 
 
 }
