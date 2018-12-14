@@ -217,7 +217,7 @@ class MainActivity : Activity() {
 
 
                 if (secuencia.get(numSecuencia) == boton) { // si el boton coincide lo indicamos
-                    Toast.makeText(this,"¡CORRECTO!",Toast.LENGTH_LONG).show()
+
 
                 }
                 else { // en caso contrario indicamos el error
@@ -235,6 +235,7 @@ class MainActivity : Activity() {
 
 
         if(numSecuencia==vueltas && perdido==false) {
+            Toast.makeText(this,"¡CORRECTO!",Toast.LENGTH_LONG).show()
             bloquearBotones()
             numSecuencia = 0 // en caso de que finalizara la secuencia lo marcamos como cero
 
