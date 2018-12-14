@@ -87,6 +87,8 @@ class MainActivity : Activity() {
             inicio = MediaPlayer.create(this, R.raw.inicio)
             sonido(inicio)
             botonRestart.setText("Reiniciar")
+            numSecuencia=0
+            vueltas=1
             secuencia.clear()
             secuencia()
 
@@ -161,7 +163,7 @@ class MainActivity : Activity() {
                             cambiarColorRojo(botonRojo)
                             handler.postDelayed({
                                 colorOriginalRojo(botonRojo)
-                            }, 1000)
+                            }, 250)
                         }, retraso)
 
 
@@ -171,7 +173,7 @@ class MainActivity : Activity() {
                             cambiarColorVerde(botonVerde)
                             handler.postDelayed({
                                 colorOriginalVerde(botonVerde)
-                            }, 1000)
+                            }, 250)
                         }, retraso)
                     }
                     2 -> {
@@ -179,7 +181,7 @@ class MainActivity : Activity() {
                             cambiarColorAzul(botonAzul)
                             handler.postDelayed({
                                 colorOriginalAzul(botonAzul)
-                            }, 1000)
+                            }, 250)
                         }, retraso)
                     }
                     3 -> {
@@ -187,12 +189,12 @@ class MainActivity : Activity() {
                             cambiarColorAmarillo(botonAmarillo)
                             handler.postDelayed({
                                 colorOriginalAmarillo(botonAmarillo)
-                            }, 1000)
+                            }, 250)
                         }, retraso)
                     }
 
                 }
-                retraso += 2000 // aumentamos el tiempo entre boton y boton para que no se marquen todas a la vez
+                retraso += 600 // aumentamos el tiempo entre boton y boton para que no se marquen todas a la vez
             }
 
         handler.postDelayed({
@@ -226,8 +228,8 @@ class MainActivity : Activity() {
 
                 }
 
-
                 numSecuencia=numSecuencia+1 // aumentamos en uno el numero de la secuencia
+
             }
 
 
